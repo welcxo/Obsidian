@@ -41,9 +41,11 @@ end
 local ThemeManager = {
     Folder = "Obsidian",
     Library = nil,
+    DefaultTheme = "MSPaint",
     AppliedToTab = false,
     BuiltInThemes = {
         ["Default"] = { 1, { FontColor = "ffffff", MainColor = "191919", AccentColor = "7d55ff", BackgroundColor = "0f0f0f", OutlineColor = "282828" } },
+        ["MSPaint"] = { 20, { FontColor = "ebedf5", MainColor = "15171d", AccentColor = "917dff", BackgroundColor = "0e0f13", OutlineColor = "2b2e39" } },
         ["BBot"] = { 2, { FontColor = "ffffff", MainColor = "1e1e1e", AccentColor = "7e48a3", BackgroundColor = "232323", OutlineColor = "141414" } },
         ["Fatality"] = { 3, { FontColor = "ffffff", MainColor = "1e1842", AccentColor = "c50754", BackgroundColor = "191335", OutlineColor = "3c355d" } },
         ["Jester"] = { 4, { FontColor = "ffffff", MainColor = "242424", AccentColor = "db4467", BackgroundColor = "1c1c1c", OutlineColor = "373737" } },
@@ -405,7 +407,7 @@ do
         --groupbox:AddToggle("BackgroundImageEnabled", { Text = "Background Image", Default = self.Library.Scheme.BackgroundImageEnabled })
         --groupbox:AddInput("BackgroundImage", { Text = "Background Image:", Default = ""})
         --groupbox:AddToggle("WindowGlow", { Text = "Window Glow",  Default = self.Library.Scheme.WindowGlow })
-        groupbox:AddDropdown("FontFace", { Text = "Font Face:", Default = "Code", Values = self.Fonts })
+        groupbox:AddDropdown("FontFace", { Text = "Font Face:", Default = "GothamMedium", Values = self.Fonts })
         groupbox:AddToggle("ThemeManager_TransparentGUI", {
             Text = "Transparent GUI",
             Default = false,
