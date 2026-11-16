@@ -513,9 +513,9 @@ local SaveManager = {} do
     function SaveManager:BuildConfigSection(tab)
         assert(self.Library, "Must set SaveManager.Library")
 
-        local section = tab:AddRightGroupbox("Configuration", "folder-cog")
+        local section = tab:AddRightGroupbox("Configs", "folder-cog")
 
-        section:AddInput("SaveManager_ConfigName",    { Text = "Config Name:" })
+        section:AddInput("SaveManager_ConfigName",    { Text = "Config name" })
         section:AddButton("Create Config", function()
             local name = self.Library.Options.SaveManager_ConfigName.Value
 
@@ -552,7 +552,7 @@ local SaveManager = {} do
 
         section:AddDivider()
 
-        section:AddDropdown("SaveManager_ConfigList", { Text = "Config List:", Values = self:RefreshConfigList(), AllowNull = true })
+        section:AddDropdown("SaveManager_ConfigList", { Text = "Saved configs", Values = self:RefreshConfigList(), AllowNull = true })
         section:AddButton("Load", function()
             local name = self.Library.Options.SaveManager_ConfigList.Value
 
@@ -648,7 +648,7 @@ local SaveManager = {} do
         section:AddDivider()
 
         -- Import functionality
-        section:AddInput("SaveManager_ImportData", { Text = "Import Data:" })
+        section:AddInput("SaveManager_ImportData", { Text = "Import config data" })
         section:AddButton("Import Config", function()
             local configData = self.Library.Options.SaveManager_ImportData.Value
 
