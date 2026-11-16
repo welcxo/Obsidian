@@ -309,12 +309,13 @@ local Library = {
     --// Scheme \\--
     IsLightTheme = false,
     Scheme = {
-        BackgroundColor = Color3.fromRGB(12, 14, 17),
-        MainColor = Color3.fromRGB(19, 22, 26),
-        AccentColor = Color3.fromRGB(64, 220, 190),
-        OutlineColor = Color3.fromRGB(34, 39, 45),
-        FontColor = Color3.new(1, 1, 1),
-        Font = Font.fromEnum(Enum.Font.Code),
+        -- MSPaint custom palette: graphite surfaces, soft text and a restrained violet accent.
+        BackgroundColor = Color3.fromRGB(14, 15, 19),
+        MainColor = Color3.fromRGB(21, 23, 29),
+        AccentColor = Color3.fromRGB(145, 125, 255),
+        OutlineColor = Color3.fromRGB(43, 46, 57),
+        FontColor = Color3.fromRGB(235, 237, 245),
+        Font = Font.fromEnum(Enum.Font.GothamMedium),
 
         RedColor = Color3.fromRGB(255, 50, 50),
         BlueColor = Color3.fromRGB(80, 155, 255),
@@ -438,7 +439,7 @@ local Templates = {
         MinimizedSubtitle = "",
         AutoMinimize = false,
 
-        CornerRadius = 10,
+        CornerRadius = 9,
         NotifySide = "Right",
         DisableNotificationBell = false,
         ShowCustomCursor = true,
@@ -456,7 +457,7 @@ local Templates = {
         ShadowColor = "DarkColor",
 
         --// Optional gradient overlay on the main window background
-        Gradient = true,
+        Gradient = false,
         GradientColorSequence = nil, -- defaults to Accent -> Background
         GradientTransparency = NumberSequence.new({
             NumberSequenceKeypoint.new(0, 0.85),
@@ -478,7 +479,7 @@ local Templates = {
         FullscreenBackgroundImage = nil,
         FullscreenBackgroundImageTransparency = 0.2,
 
-        Font = Enum.Font.Code,
+        Font = Enum.Font.GothamMedium,
         ToggleKeybind = Enum.KeyCode.RightControl,
 
         ShowMobileButtons = true,
@@ -519,11 +520,11 @@ local Templates = {
         TabSwipeFrom = "bottom",
         --// Main sidebar tab button styling (ported from devcomios)
         TabButtonsStyle = {
-            Gap = 0,
-            Padding = 0,
-            CornerRadius = 0,
-            Indicator = false,
-            IndicatorWidth = 2,
+            Gap = 4,
+            Padding = 8,
+            CornerRadius = 8,
+            Indicator = true,
+            IndicatorWidth = 3,
             IndicatorHeight = 20,
         }
     },
@@ -15208,50 +15209,9 @@ function Library:CreateWindow(WindowInfo)
             })
         )
         Library:AddOutline(MainFrame)
-
-        --// Accent identity strip: thin brand-color bar across the very top of
-        --// the window, inset so it never pokes past the rounded corners.
-        local AccentStrip = New("Frame", {
-            BackgroundColor3 = "AccentColor",
-            Position = UDim2.fromOffset(math.max(WindowInfo.CornerRadius, 2), 0),
-            Size = UDim2.new(1, -math.max(WindowInfo.CornerRadius, 2) * 2, 0, 2),
-            ZIndex = 3,
-            Parent = MainFrame,
-        })
-        New("UIGradient", {
-            Color = ColorSequence.new({
-                ColorSequenceKeypoint.new(0, Color3.new(1, 1, 1)),
-                ColorSequenceKeypoint.new(0.5, Library.Scheme.AccentColor),
-                ColorSequenceKeypoint.new(1, Color3.new(1, 1, 1)),
-            }),
-            Transparency = NumberSequence.new({
-                NumberSequenceKeypoint.new(0, 0.55),
-                NumberSequenceKeypoint.new(0.5, 0),
-                NumberSequenceKeypoint.new(1, 0.55),
-            }),
-            Parent = AccentStrip,
-        })
-
-        --// Divider under the title bar: a soft accent-tinted fade instead of a
-        --// flat grey rule, so the chrome reads as designed rather than default.
-        --// (Named separately from the sidebar's own `DividerLine`, used later
-        --// for resize tweening, so the two never collide.)
-        local TitleBarDivider = New("Frame", {
-            BackgroundColor3 = "AccentColor",
-            BackgroundTransparency = 0.75,
+        Library:MakeLine(MainFrame, {
             Position = UDim2.fromOffset(0, 48),
             Size = UDim2.new(1, 0, 0, 1),
-            ZIndex = 2,
-            Parent = MainFrame,
-        })
-        New("UIGradient", {
-            Transparency = NumberSequence.new({
-                NumberSequenceKeypoint.new(0, 1),
-                NumberSequenceKeypoint.new(0.15, 0),
-                NumberSequenceKeypoint.new(0.85, 0),
-                NumberSequenceKeypoint.new(1, 1),
-            }),
-            Parent = TitleBarDivider,
         })
 
         DividerLine = New("Frame", {
