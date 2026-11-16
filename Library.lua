@@ -15221,7 +15221,7 @@ function Library:CreateWindow(WindowInfo)
         New("UIGradient", {
             Color = ColorSequence.new({
                 ColorSequenceKeypoint.new(0, Color3.new(1, 1, 1)),
-                ColorSequenceKeypoint.new(0.5, "AccentColor"),
+                ColorSequenceKeypoint.new(0.5, Library.Scheme.AccentColor),
                 ColorSequenceKeypoint.new(1, Color3.new(1, 1, 1)),
             }),
             Transparency = NumberSequence.new({
